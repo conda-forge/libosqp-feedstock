@@ -1,5 +1,5 @@
 {% set name = "libosqp" %}
-{% set version = "0.6.0" %}
+{% set version = "0.6.2" %}
 
 package:
   name: {{ name }}
@@ -8,7 +8,7 @@ package:
 source:
   - folder: osqp
     url: https://github.com/oxfordcontrol/osqp/archive/v{{ version }}.tar.gz
-    sha256: 6e00d11d1f88c1e32a4419324b7539b89e8f9cbb1c50afe69f375347c989ba2b
+    sha256: d973c33c3164caa381ed7387375347a46f7522523350a4e51989479b9d3b59c7
 
   # Manually download repos that are used via git submodules
   # Note: make sure that the version used here is compatible with the one used in osqp
