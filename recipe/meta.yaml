@@ -15,7 +15,7 @@ source:
   # Note: make sure that the version used here is compatible with the one used in osqp
   - folder: qdldl
     url: https://github.com/oxfordcontrol/qdldl/archive/v{{ qdldlversion }}.tar.gz
-    sha256: f48129c5c2f0879866bff8b82f6c0dd35d7c256ef86887905ebc337798a6aabf
+    sha256: 2868b0e61b7424174e9adef3cb87478329f8ab2075211ef28fe477f29e0e5c99
 
 build:
   number: 1
