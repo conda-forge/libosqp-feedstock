@@ -1,5 +1,6 @@
 {% set name = "libosqp" %}
 {% set version = "0.6.2" %}
+{% set qdldlversion = "0.1.5" %}
 
 package:
   name: {{ name }}
@@ -13,11 +14,11 @@ source:
   # Manually download repos that are used via git submodules
   # Note: make sure that the version used here is compatible with the one used in osqp
   - folder: qdldl
-    url: https://github.com/oxfordcontrol/qdldl/archive/70596afefe1c8a58ddd491ff9b55d976c296a64b.zip
-    sha256: f48129c5c2f0879866bff8b82f6c0dd35d7c256ef86887905ebc337798a6aabf
+    url: https://github.com/oxfordcontrol/qdldl/archive/v{{ qdldlversion }}.tar.gz
+    sha256: 2868b0e61b7424174e9adef3cb87478329f8ab2075211ef28fe477f29e0e5c99
 
 build:
-  number: 0
+  number: 1
   run_exports:
     # No ABI policy is documented, let's be conservative
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
