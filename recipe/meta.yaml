@@ -10,6 +10,8 @@ source:
   - folder: osqp
     url: https://github.com/oxfordcontrol/osqp/archive/v{{ version }}.tar.gz
     sha256: d973c33c3164caa381ed7387375347a46f7522523350a4e51989479b9d3b59c7
+    patches:
+      - 310.patch
 
   # Manually download repos that are used via git submodules
   # Note: make sure that the version used here is compatible with the one used in osqp
@@ -18,7 +20,7 @@ source:
     sha256: 2868b0e61b7424174e9adef3cb87478329f8ab2075211ef28fe477f29e0e5c99
 
 build:
-  number: 2
+  number: 3
   run_exports:
     # No ABI policy is documented, let's be conservative
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
