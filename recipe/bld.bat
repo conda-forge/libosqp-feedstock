@@ -11,6 +11,7 @@ cmake ^
     -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
     -DCMAKE_BUILD_TYPE=Release ^
     -DCMAKE_INSTALL_LIBDIR=lib ^
+    -DOSQP_RESPECT_BUILD_SHARED_LIBS:BOOL=ON ^
     -DBUILD_SHARED_LIBS=ON ^
     ..
 if errorlevel 1 exit 1
