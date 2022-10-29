@@ -1,7 +1,7 @@
 From 0b09ce4abb550e8a4a356a9885d7664b10f774c8 Mon Sep 17 00:00:00 2001
 From: Silvio Traversaro <silvio.traversaro@iit.it>
 Date: Wed, 2 Jun 2021 17:45:25 +0200
-Subject: [PATCH] Add OSQP_RESPECT_BUILD_SHARED_LIBS option
+Subject: [PATCH 1/2] Add OSQP_RESPECT_BUILD_SHARED_LIBS option
 
 This option make the osqp build system generate either a static library
 or a shared library, depending on the value of the standard BUILD_SHARED_LIBS

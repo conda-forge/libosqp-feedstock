@@ -6,18 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  - folder: osqp
-    url: https://github.com/osqp/osqp/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: d973c33c3164caa381ed7387375347a46f7522523350a4e51989479b9d3b59c7
-    patches:
-      # see https://github.com/osqp/osqp/pull/310, can be dropped for osqp v1.0
-      - patches/0001-Add-OSQP_RESPECT_BUILD_SHARED_LIBS-option.patch
-
-  # Manually download repos that are used via git submodules
-  # Note: make sure that the version used here is compatible with the one used in osqp
-  - folder: qdldl
-    url: https://github.com/oxfordcontrol/qdldl/archive/v{{ qdldlversion }}.tar.gz
-    sha256: 2868b0e61b7424174e9adef3cb87478329f8ab2075211ef28fe477f29e0e5c99
+  url: https://github.com/osqp/osqp/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: d973c33c3164caa381ed7387375347a46f7522523350a4e51989479b9d3b59c7
+  patches:
+    # see https://github.com/osqp/osqp/pull/310, can be dropped for osqp v1.0
+    - patches/0001-Add-OSQP_RESPECT_BUILD_SHARED_LIBS-option.patch
+    # use libqdldl from conda-forge
+    - patches/0002-point-to-non-vendored-qdldl-headers.patch
 
 build:
   number: 4
@@ -31,6 +26,8 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake
     - ninja
+  host:
+    - libqdldl ={{ qdldlversion }}
 
 test:
   commands:

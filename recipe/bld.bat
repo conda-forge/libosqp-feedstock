@@ -1,8 +1,5 @@
 @echo on
-:: Copy qdldl files to the submodule directory
-xcopy /E qdldl osqp\lin_sys\direct\qdldl\qdldl_sources\
 
-cd osqp
 mkdir build
 cd build
 

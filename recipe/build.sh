@@ -1,11 +1,6 @@
 #!/bin/sh
 set -ex
 
-# Copy qdldl files to the submodule directory
-cp -r qdldl/. osqp/lin_sys/direct/qdldl/qdldl_sources
-
-cd osqp
-
 mkdir build && cd build
 
 cmake -G Ninja \
