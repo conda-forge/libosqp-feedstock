@@ -1,25 +1,23 @@
-:: Copy qdldl files to the submodule directory
-xcopy /E qdldl osqp\lin_sys\direct\qdldl\qdldl_sources\
+@echo on
 
-cd osqp
 mkdir build
 cd build
 
-cmake ^
-    -G "NMake Makefiles" ^
+cmake -G "Ninja" ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
     -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
     -DCMAKE_BUILD_TYPE=Release ^
     -DCMAKE_INSTALL_LIBDIR=lib ^
+    -DENABLE_MKL_PARDISO=OFF ^
     -DOSQP_RESPECT_BUILD_SHARED_LIBS:BOOL=ON ^
     -DBUILD_SHARED_LIBS=ON ^
     ..
-if errorlevel 1 exit 1
+if %ERRORLEVEL% neq 0 exit 1
 
 :: Build.
 cmake --build . --config Release
-if errorlevel 1 exit 1
+if %ERRORLEVEL% neq 0 exit 1
 
 :: Install.
-cmake --build . --config Release --target install
-if errorlevel 1 exit 1
+cmake --install .
+if %ERRORLEVEL% neq 0 exit 1
