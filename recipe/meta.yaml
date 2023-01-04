@@ -11,8 +11,8 @@ source:
   patches:
     # see https://github.com/osqp/osqp/pull/310, can be dropped for osqp v1.0
     - patches/0001-Add-OSQP_RESPECT_BUILD_SHARED_LIBS-option.patch
-    # use libqdldl from conda-forge
-    - patches/0002-point-to-non-vendored-qdldl-headers.patch
+    # use libqdldl from conda-forge, build interface in osqp directly
+    - patches/0002-build-qdldl-interface-as-part-of-osqp.patch
 
 build:
   number: 4
@@ -45,9 +45,8 @@ about:
   license: Apache-2.0
   summary: The Operator Splitting QP Solver.
   license_file:
-    - osqp/LICENSE
-    - qdldl/LICENSE
-    - osqp/lin_sys/direct/qdldl/amd/LICENSE
+    - LICENSE
+    - lin_sys/direct/qdldl/amd/LICENSE
 
 extra:
   recipe-maintainers:
