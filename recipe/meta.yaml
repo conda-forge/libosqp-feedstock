@@ -1,4 +1,4 @@
-{% set version = "0.6.2" %}
+{% set version = "0.6.3" %}
 {% set qdldlversion = "0.1.5" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/osqp/osqp/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: d973c33c3164caa381ed7387375347a46f7522523350a4e51989479b9d3b59c7
+  sha256: a6b4148019001f87489c27232e2bdbac37c94f38fa37c1b4ee11eaa5654756d2
   patches:
     # see https://github.com/osqp/osqp/pull/310, can be dropped for osqp v1.0
     - patches/0001-Add-OSQP_RESPECT_BUILD_SHARED_LIBS-option.patch
@@ -15,7 +15,7 @@ source:
     - patches/0002-build-qdldl-interface-as-part-of-osqp.patch
 
 build:
-  number: 4
+  number: 0
   run_exports:
     # No ABI policy is documented, let's be conservative
     - {{ pin_subpackage('libosqp', max_pin='x.x.x') }}
