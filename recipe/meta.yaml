@@ -1,5 +1,5 @@
 {% set version = "0.6.3" %}
-{% set qdldlversion = "0.1.5" %}
+{% set qdldlversion = "0.1.7" %}
 
 package:
   name: libosqp
@@ -13,19 +13,30 @@ source:
     - patches/0001-Add-OSQP_RESPECT_BUILD_SHARED_LIBS-option.patch
     # use libqdldl from conda-forge, build interface in osqp directly
     - patches/0002-build-qdldl-interface-as-part-of-osqp.patch
+      # install osqp_demo and osqp_tester executables to easily make them relocatable,
+      # see: https://github.com/conda-forge/libosqp-feedstock/pull/12#discussion_r1807117589
+    - patches/0003-Install-osqp_demo-and-osqp_tester.patch
 
 build:
-  number: 0
+  number: 1
   run_exports:
     # No ABI policy is documented, let's be conservative
     - {{ pin_subpackage('libosqp', max_pin='x.x.x') }}
+  ignore_run_exports:
+    - numpy
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - {{ stdlib('c') }}
     - cmake
     - ninja
+    # Unittest source code is generated at build time using numpy and scipy
+    - python
+    - numpy
+    # v0.6.3 imports scipy.randn which was removed in 1.12
+    - scipy <1.12
   host:
     - libqdldl ={{ qdldlversion }}
 
@@ -35,10 +46,12 @@ test:
     - test -f ${PREFIX}/lib/libosqp.so  # [linux]
     - test -f ${PREFIX}/lib/libosqp.dylib  # [osx]
     - test -f ${PREFIX}/lib/cmake/osqp/osqp-config.cmake  # [not win]
-    - if exist %PREFIX%\\Library\\include\\osqp\\osqp.h (exit 0) else (exit 1)  # [win]
-    - if exist $PREFIX$\\Library\\lib\\osqp.lib (exit 0) else (exit 1)  # [win]
-    - if exist $PREFIX$\\Library\\bin\\osqp.dll (exit 0) else (exit 1)  # [win]
-    - if exist %PREFIX%\\Library\\lib\\cmake\\osqp\\osqp-config.cmake (exit 0) else (exit 1)  # [win]
+    - if not exist %LIBRARY_INC%\osqp\osqp.h exit 1                     # [win]
+    - if not exist %LIBRARY_LIB%\osqp.lib exit 1                        # [win]
+    - if not exist %LIBRARY_BIN%\osqp.dll exit 1                        # [win]
+    - if not exist %LIBRARY_LIB%\cmake\osqp\osqp-config.cmake exit 1    # [win]
+    - osqp_demo
+    - osqp_tester
 
 about:
   home: https://github.com/osqp/osqp
