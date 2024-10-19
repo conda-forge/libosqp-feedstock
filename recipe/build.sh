@@ -12,6 +12,7 @@ cmake -G Ninja \
     -DENABLE_MKL_PARDISO=OFF \
     -DOSQP_RESPECT_BUILD_SHARED_LIBS:BOOL=ON \
     -DBUILD_SHARED_LIBS=ON \
+    -DUNITTESTS:BOOL=ON \
     ..
 
 cmake --build .
