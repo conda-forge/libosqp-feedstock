@@ -56,7 +56,7 @@ about:
   summary: The Operator Splitting QP Solver.
   license_file:
     - LICENSE
-    - lin_sys/direct/qdldl/amd/LICENSE
+    - algebra/_common/lin_sys/qdldl/amd/LICENSE
 
 extra:
   recipe-maintainers:
