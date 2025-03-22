@@ -35,8 +35,7 @@ requirements:
     # Unittest source code is generated at build time using numpy and scipy
     - python
     - numpy
-    # v0.6.3 imports scipy.randn which was removed in 1.12
-    - scipy <1.12
+    - scipy
   host:
     - libqdldl ={{ qdldlversion }}
 
