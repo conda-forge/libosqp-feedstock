@@ -1,4 +1,4 @@
-{% set version = "0.6.3" %}
+{% set version = "1.0.0" %}
 {% set qdldlversion = "0.1.7" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/osqp/osqp/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: a6b4148019001f87489c27232e2bdbac37c94f38fa37c1b4ee11eaa5654756d2
+  sha256: dd6a1c2e7e921485697d5e7cdeeb043c712526c395b3700601f51d472a7d8e48
   patches:
     # see https://github.com/osqp/osqp/pull/310, can be dropped for osqp v1.0
     - patches/0001-Add-OSQP_RESPECT_BUILD_SHARED_LIBS-option.patch
@@ -18,7 +18,7 @@ source:
     - patches/0003-Install-osqp_demo-and-osqp_tester.patch
 
 build:
-  number: 1
+  number: 0
   run_exports:
     # No ABI policy is documented, let's be conservative
     - {{ pin_subpackage('libosqp', max_pin='x.x.x') }}
