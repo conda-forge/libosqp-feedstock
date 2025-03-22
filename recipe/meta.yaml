@@ -9,13 +9,11 @@ source:
   url: https://github.com/osqp/osqp/archive/refs/tags/v{{ version }}.tar.gz
   sha256: dd6a1c2e7e921485697d5e7cdeeb043c712526c395b3700601f51d472a7d8e48
   patches:
-    # see https://github.com/osqp/osqp/pull/310, can be dropped for osqp v1.0
-    - patches/0001-Add-OSQP_RESPECT_BUILD_SHARED_LIBS-option.patch
     # use libqdldl from conda-forge, build interface in osqp directly
-    - patches/0002-build-qdldl-interface-as-part-of-osqp.patch
+    # - patches/0002-build-qdldl-interface-as-part-of-osqp.patch
       # install osqp_demo and osqp_tester executables to easily make them relocatable,
       # see: https://github.com/conda-forge/libosqp-feedstock/pull/12#discussion_r1807117589
-    - patches/0003-Install-osqp_demo-and-osqp_tester.patch
+    - patches/0001-Install-osqp_demo-and-osqp_tester.patch
 
 build:
   number: 0
