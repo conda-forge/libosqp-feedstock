@@ -14,6 +14,7 @@ source:
       # install osqp_demo and osqp_tester executables to easily make them relocatable,
       # see: https://github.com/conda-forge/libosqp-feedstock/pull/12#discussion_r1807117589
     - patches/0001-Install-osqp_demo-and-osqp_tester.patch
+    - patches/0003-change-path-to-testcodes-dir.patch
 
 build:
   number: 0
@@ -47,6 +48,8 @@ test:
     - if not exist %LIBRARY_LIB%\osqp.lib exit 1                        # [win]
     - if not exist %LIBRARY_BIN%\osqp.dll exit 1                        # [win]
     - if not exist %LIBRARY_LIB%\cmake\osqp\osqp-config.cmake exit 1    # [win]
+    - mkdir %PREFIX%\testcodes\embedded1 %PREFIX%\testcodes\embedded2  # [win]
+    - mkdir -p ${PREFIX}/testcodes/embedded1 ${PREFIX}/testcodes/embedded2  # [not win]
     - osqp_demo
     - osqp_tester
 
