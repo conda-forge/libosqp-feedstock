@@ -48,8 +48,8 @@ test:
     - if not exist %LIBRARY_LIB%\osqp.lib exit 1                        # [win]
     - if not exist %LIBRARY_BIN%\osqp.dll exit 1                        # [win]
     - if not exist %LIBRARY_LIB%\cmake\osqp\osqp-config.cmake exit 1    # [win]
-    - mkdir %PREFIX%\testcodes\embedded1 %PREFIX%\testcodes\embedded2  # [win]
-    - mkdir -p ${PREFIX}/testcodes/embedded1 ${PREFIX}/testcodes/embedded2  # [not win]
+    - mkdir testcodes\embedded1 testcodes\embedded2  # [win]
+    - mkdir -p ./testcodes/embedded1 ./testcodes/embedded2  # [not win]
     - osqp_demo
     - osqp_tester
 
