@@ -1,5 +1,5 @@
-{% set version = "0.6.3" %}
-{% set qdldlversion = "0.1.7" %}
+{% set version = "1.0.0" %}
+{% set qdldlversion = "0.1.8" %}
 
 package:
   name: libosqp
@@ -7,18 +7,17 @@ package:
 
 source:
   url: https://github.com/osqp/osqp/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: a6b4148019001f87489c27232e2bdbac37c94f38fa37c1b4ee11eaa5654756d2
+  sha256: dd6a1c2e7e921485697d5e7cdeeb043c712526c395b3700601f51d472a7d8e48
   patches:
-    # see https://github.com/osqp/osqp/pull/310, can be dropped for osqp v1.0
-    - patches/0001-Add-OSQP_RESPECT_BUILD_SHARED_LIBS-option.patch
     # use libqdldl from conda-forge, build interface in osqp directly
-    - patches/0002-build-qdldl-interface-as-part-of-osqp.patch
+    # - patches/0002-build-qdldl-interface-as-part-of-osqp.patch
       # install osqp_demo and osqp_tester executables to easily make them relocatable,
       # see: https://github.com/conda-forge/libosqp-feedstock/pull/12#discussion_r1807117589
-    - patches/0003-Install-osqp_demo-and-osqp_tester.patch
+    - patches/0001-Install-osqp_demo-and-osqp_tester.patch
+    - patches/0003-change-path-to-testcodes-dir.patch
 
 build:
-  number: 1
+  number: 0
   run_exports:
     # No ABI policy is documented, let's be conservative
     - {{ pin_subpackage('libosqp', max_pin='x.x.x') }}
@@ -35,8 +34,7 @@ requirements:
     # Unittest source code is generated at build time using numpy and scipy
     - python
     - numpy
-    # v0.6.3 imports scipy.randn which was removed in 1.12
-    - scipy <1.12
+    - scipy
   host:
     - libqdldl ={{ qdldlversion }}
 
@@ -50,6 +48,8 @@ test:
     - if not exist %LIBRARY_LIB%\osqp.lib exit 1                        # [win]
     - if not exist %LIBRARY_BIN%\osqp.dll exit 1                        # [win]
     - if not exist %LIBRARY_LIB%\cmake\osqp\osqp-config.cmake exit 1    # [win]
+    - mkdir testcodes\embedded1 testcodes\embedded2  # [win]
+    - mkdir -p ./testcodes/embedded1 ./testcodes/embedded2  # [not win]
     - osqp_demo
     - osqp_tester
 
@@ -59,7 +59,7 @@ about:
   summary: The Operator Splitting QP Solver.
   license_file:
     - LICENSE
-    - lin_sys/direct/qdldl/amd/LICENSE
+    - algebra/_common/lin_sys/qdldl/amd/LICENSE
 
 extra:
   recipe-maintainers:
