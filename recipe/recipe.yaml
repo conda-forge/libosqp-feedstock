@@ -18,7 +18,7 @@ source:
     - patches/0003-change-path-to-testcodes-dir.patch
 
 build:
-  number: 0
+  number: 1
 requirements:
   build:
     - ${{ compiler('c') }}
