@@ -15,10 +15,11 @@ source:
       # install osqp_demo and osqp_tester executables to easily make them relocatable,
       # see: https://github.com/conda-forge/libosqp-feedstock/pull/12#discussion_r1807117589
     - patches/0001-Install-osqp_demo-and-osqp_tester.patch
-    - patches/0003-change-path-to-testcodes-dir.patch
+    - patches/0002-Use-relative-path-to-testcodes-directory.patch
+    - patches/0003-Link-against-qdldl-shared-library.patch
 
 build:
-  number: 1
+  number: 2
 requirements:
   build:
     - ${{ compiler('c') }}
