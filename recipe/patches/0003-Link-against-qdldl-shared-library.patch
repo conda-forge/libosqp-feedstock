@@ -64,7 +64,7 @@ index 4e5d1501..4e556dab 100644
    add_executable(osqp_simple_demo
                   ${OSQP_EXAMPLES_DIR}/osqp_simple_demo.c )
 -  target_link_libraries(osqp_simple_demo osqpstatic ${osqplib_link_libs})
-+  target_link_libraries(osqp_simple_demo osqp ${osqplib_link_libs})
++  target_link_libraries(osqp_simple_demo osqp)
  
    add_executable(osqp_demo
                   ${OSQP_EXAMPLES_DIR}/osqp_demo.c
@@ -73,7 +73,7 @@ index 4e5d1501..4e556dab 100644
                                ${osqplib_includes}
                                ${OSQP_EXAMPLES_DIR}/problems )
 -  target_link_libraries(osqp_demo osqpstatic ${osqplib_link_libs})
-+  target_link_libraries(osqp_demo osqp ${osqplib_link_libs})
++  target_link_libraries(osqp_demo osqp)
    install(TARGETS osqp_demo)
  
    if(OSQP_CODEGEN)
@@ -143,7 +143,7 @@ index e5428973..9bf0155f 100644
            ${LIN_SYS_QDLDL_INC_PATHS} )
  
 +target_include_directories(OSQPLIB PUBLIC ${qdldl_INCLUDE_DIRS})
-+target_link_libraries(OSQPLIB qdldl::qdldl)
++target_link_libraries(OSQPLIB PRIVATE qdldl::qdldl)
  
  # Setup the file copying for the code generation target
  if( OSQP_CODEGEN )
@@ -156,7 +156,7 @@ index 07884b97..6665f258 100644
  target_include_directories(lin_alg_tester PRIVATE
                             ${OSQP_LINALG_TESTER_INC_DIRS})
 -target_link_libraries(lin_alg_tester osqpstatic Catch2::Catch2 ${osqplib_link_libs})
-+target_link_libraries(lin_alg_tester osqp Catch2::Catch2 ${osqplib_link_libs})
++target_link_libraries(lin_alg_tester osqp Catch2::Catch2)
  
  add_test(NAME lin_alg_tester COMMAND lin_alg_tester)
  
@@ -165,7 +165,7 @@ index 07884b97..6665f258 100644
  endif()
  
 -target_link_libraries(osqp_tester osqpstatic Catch2::Catch2 ${osqplib_link_libs})
-+target_link_libraries(osqp_tester osqp Catch2::Catch2 ${osqplib_link_libs})
++target_link_libraries(osqp_tester osqp Catch2::Catch2)
  install(TARGETS osqp_tester)
  
  add_test(NAME osqp_tester COMMAND osqp_tester)
@@ -174,7 +174,7 @@ index 07884b97..6665f258 100644
                               ${CMAKE_CURRENT_SOURCE_DIR}/../include/private
                               ${osqplib_includes})
 -  target_link_libraries(osqp_tester_custom_memory osqpstatic Catch2::Catch2 ${osqplib_link_libs})
-+  target_link_libraries(osqp_tester_custom_memory osqp Catch2::Catch2 ${osqplib_link_libs})
++  target_link_libraries(osqp_tester_custom_memory osqp Catch2::Catch2)
  
    add_test(NAME osqp_tester_custom_memory COMMAND osqp_tester_custom_memory)
  endif()
