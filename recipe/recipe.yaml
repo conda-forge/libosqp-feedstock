@@ -17,6 +17,7 @@ source:
     - patches/0001-Install-osqp_demo-and-osqp_tester.patch
     - patches/0002-Use-relative-path-to-testcodes-directory.patch
     - patches/0003-Link-against-qdldl-shared-library.patch
+    - patches/0004-Export-additional-functions-part-of-the-API.patch
 
 build:
   number: 2
