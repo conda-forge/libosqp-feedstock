@@ -16,9 +16,10 @@ source:
       # see: https://github.com/conda-forge/libosqp-feedstock/pull/12#discussion_r1807117589
     - patches/0001-Install-osqp_demo-and-osqp_tester.patch
     - patches/0003-change-path-to-testcodes-dir.patch
+    - patches/0004-expose-missing-functions-windows-backport-744.patch
 
 build:
-  number: 1
+  number: 2
 requirements:
   build:
     - ${{ compiler('c') }}
