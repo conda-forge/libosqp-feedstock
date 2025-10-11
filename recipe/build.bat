@@ -3,22 +3,45 @@
 mkdir build
 cd build
 
+:: Initially configure with OSQP_USE_BUNDLED_QDLDL ON to run tests
 cmake -G "Ninja" ^
-    -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
-    -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
-    -DCMAKE_BUILD_TYPE=Release ^
-    -DCMAKE_INSTALL_LIBDIR=lib ^
+    %CMAKE_ARGS% ^
     -DOSQP_ALGEBRA_BACKEND=builtin ^
     -DOSQP_BUILD_UNITTESTS:BOOL=ON ^
-    -DOSQP_BUILD_SHARED_LIB:BOOL=ON ^
-    -DBUILD_SHARED_LIBS=ON ^
-    ..
+    -DOSQP_BUILD_SHARED_LIB:BOOL=OFF ^
+    -DBUILD_SHARED_LIBS:BOOL=OFF ^
+    -DOSQP_BUILD_STATIC_LIB:BOOL=ON ^
+    -DOSQP_USE_BUNDLED_QDLDL:BOOL=ON ^
+    -DOSQP_CODEGEN:BOOL=OFF ^
+    %SRC_DIR%
 if %ERRORLEVEL% neq 0 exit 1
 
 :: Build.
-cmake --build . --config Release
+cmake --build .
+if %ERRORLEVEL% neq 0 exit 1
+
+:: Test
+if not "%CONDA_BUILD_CROSS_COMPILATION%" == "1" (
+    cmake --build . --target test
+    if %ERRORLEVEL% neq 0 exit 1
+
+    .\out\osqp_simple_demo
+    if %ERRORLEVEL% neq 0 exit 1
+
+    .\out\osqp_demo
+    if %ERRORLEVEL% neq 0 exit 1
+)
+
+:: Re-configure to dynamically link qdldl and build shared library
+cmake -DBUILD_SHARED_LIBS=ON ^
+    -DOSQP_BUILD_SHARED_LIB=ON ^
+    -DOSQP_BUILD_STATIC_LIB=OFF ^
+    -DOSQP_BUILD_UNITTESTS=OFF ^
+    -DOSQP_BUILD_DEMO_EXE=OFF  ^
+    -DOSQP_USE_BUNDLED_QDLDL:BOOL=OFF ^
+    .
 if %ERRORLEVEL% neq 0 exit 1
 
 :: Install.
-cmake --install .
+cmake --build . --target install
 if %ERRORLEVEL% neq 0 exit 1
