@@ -3,7 +3,11 @@
 mkdir build
 cd build
 
-:: Initially configure with OSQP_USE_BUNDLED_QDLDL ON to run tests
+:: Initially configure with OSQP_USE_BUNDLED_QDLDL ON to run tests.
+:: While we can link against the libosqp shared library, it causes
+:: issues on Windows, because the tests use a lot of symbols that
+:: are not exported. By statically linking against the bundled qdldl
+:: library, we avoid this.
 cmake -G "Ninja" ^
     %CMAKE_ARGS% ^
     -DOSQP_ALGEBRA_BACKEND=builtin ^
