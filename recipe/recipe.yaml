@@ -16,7 +16,7 @@ source:
     - patches/0004-expose-missing-functions-windows-backport-744.patch
 
 build:
-  number: 2
+  number: 3
 requirements:
   build:
     - ${{ compiler('c') }}
