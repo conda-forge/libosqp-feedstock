@@ -1,6 +1,6 @@
 context:
   version: 1.0.0
-  qdldlversion: ${{ "0.1.9" if target_platform == "linux-riscv64" else "0.1.8" }}
+  qdldlversion: "0.1.9"
 
 package:
   name: libosqp
